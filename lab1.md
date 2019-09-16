@@ -15,7 +15,7 @@
 * taxon\_name & base\_name
 * show
 * envtype
-* timescale
+* timescale -- https://paleobiodb.org/data1.2/intervals/list.txt?scale=1&scale_level=5
 
 ### Convert occurrences to genus data frame
 
