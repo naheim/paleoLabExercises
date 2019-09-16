@@ -3,9 +3,9 @@
 <hr />
 
 ## Table of Contents
-Lab | Topic
---- | --- 
-[Lab 1](lab1.md) | Paleobiology Database & Diversity
-[Lab 2](lab2.md) | Macrostrat
+Lab | Topic | Report Due
+--- | --- | ---
+[Lab 1](lab1.md) | Paleobiology Database & Diversity | 26 September 2019
+[Lab 2](lab2.md) | Macrostrat | 03 October 2019
 
 
