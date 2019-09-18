@@ -11,7 +11,7 @@ Complete the following lab exercise and submit your answers as Word, Pages, or P
 
 The URL for the Paleobiology Database is [www.paleobiodb.org](https://paleobiodb.org). Go there now in your web browser. The first thing that you should see is the **SPLASH** page. 
 
-![splash page](lab1Figs/Figure1.png)
+![splash page](lab3Figs/Figure1.png)
 
 The Paleobiology Database (**PBDB** for short) splash page has a lot of information packed into it. At the bottom of the screen you will see some basic stats on the types and quantity of data located in the database.
 
@@ -29,13 +29,13 @@ Data Type | Definition
 All data in the PBDB can ultimately be traced back to one or more references. To search for references, click on the *Search* button at the top left (not the search field on the top right) the select *Published references*.
 
 The references search page should look something like this.
-![ref search](lab1Figs/Figure2.png)
+![ref search](lab3Figs/Figure2.png)
 
 #### Exercise Questions 1
 
 Let's take a look at a great scientific paper by Steven M. Holland and Mark E. Patzkowsky. 
 
-<a href="url"><img src="lab1Figs/Figure3.png" align="center" height="450" width="500" ></a>
+<a href="url"><img src="lab3Figs/Figure3.png" align="center" height="450" width="500" ></a>
 
 Use the reference search tool to look up collections associated with this paper and answer the following questions.
 
@@ -45,11 +45,11 @@ Use the reference search tool to look up collections associated with this paper 
 
 Once you have answered the above questions, click the **view collections** hyperlink to see a print out of the collections associated with the study.
 
-<a href="url"><img src="lab1Figs/Figure4.png" align="center" height="450" width="500" ></a>
+<a href="url"><img src="lab3Figs/Figure4.png" align="center" height="450" width="500" ></a>
 
 Click on collection no. **72438**. Answer the following questions about this collection.
 
-<a href="url"><img src="lab1Figs/Figure5.png" align="center" height="450" width="500" ></a>
+<a href="url"><img src="lab3Figs/Figure5.png" align="center" height="450" width="500" ></a>
 
 3. The first taxon in the taxonomic list is *Rafinesquina alternata*. Next to the taxonomic name is the citation (Conrad 1830), what is the significance of this citation?
 
@@ -81,11 +81,11 @@ Therefore, as we progress in this class, you will see that often times the first
 
 Return to the **SPLASH** page, and enter the PBDB Navigator by clicking on [Explore](https://paleobiodb.org/navigator/) tool. This tool is the best way to visualize the age and location of collections in the PBDB.
 
-<a href="url"><img src="lab1Figs/Figure6.png" align="center" height="450" width="500" ></a>
+<a href="url"><img src="lab3Figs/Figure6.png" align="center" height="450" width="500" ></a>
 
 Look at the search bar prompt in the top right corner. Navigator will allow you to enter a geologic time period, a taxon, an authorizer, or a geologic unit. Let's look for the genus *Abra*.
 
-<a href="url"><img src="lab1Figs/Figure7.png" align="center" height="450" width="500" ></a>
+<a href="url"><img src="lab3Figs/Figure7.png" align="center" height="450" width="500" ></a>
 
 1. Zoom in so that you can see from Texas to Florida and from Florida to New York. You can zoom using the mouse wheel, by double-clicking, or clicking the **+** and **-** signs. Some of the occurrences are orange and others are yellow, what is the significance of the different colors?
 
@@ -107,7 +107,7 @@ You can download the data displayed in your Navigator window using the little ar
 
 To customize the data you want, use the new and more detailed download form. To find the form, return to the **SPLASH** page and click on [Download Data](https://paleobiodb.org/cgi-bin/bridge.pl?a=displayDownloadGenerator). This download form uses the new Paleobiology Database **API**. Once you are more advanced, you will be able to download data directly into R using the **API**, and will no longer need to use Navigator or the download form.
 
-<a href="url"><img src="lab1Figs/Figure8.png" align="center" height="450" width="500" ></a>
+<a href="url"><img src="lab3Figs/Figure8.png" align="center" height="450" width="500" ></a>
 
 Let's try downloading all collections of both *Ambonychia* and *Abra* as a tab-separated file. 
 
@@ -115,7 +115,7 @@ Let's try downloading all collections of both *Ambonychia* and *Abra* as a tab-s
 2. Select Tab-separated values (tsv)
 3. Enter Abra, Ambonychia into the Taxon textbar.
 
-<a href="url"><img src="lab1Figs/Figure9.png" align="center" height="450" width="500" ></a>
+<a href="url"><img src="lab3Figs/Figure9.png" align="center" height="450" width="500" ></a>
 
 If you were successful you should have gotten a blue URL, describing your data request.
 
@@ -165,7 +165,7 @@ https://paleobiodb.org/data1.2/occs/list.csv?base_name=Smilodon&interval=Pleisto
 
 The following figure deconstructs each element of this query.
 
-<a href="url"><img src="lab1Figs/API.png" align="center" height="600" width="750" ></a>
+<a href="url"><img src="lab3Figs/API.png" align="center" height="600" width="750" ></a>
 
 The first half of the query, before the **?** is fairly straightforward because there are only a few possible variations. However, the **parameters** that come afterwards can become quite cumbersome because there are many varieties of them, and many of them will change depending on what type of data you are using (i.e., collections vs. occurrences). You will need to use the documentation to see a full list of the possible paramters.
 
@@ -177,7 +177,7 @@ The first half of the query, before the **?** is fairly straightforward because 
 
 You can also access the API documentation from the main SPLASH page.
 
-<a href="url"><img src="lab1Figs/Figure10.png" align="center" height="450" width="500" ></a>
+<a href="url"><img src="lab3Figs/Figure10.png" align="center" height="450" width="500" ></a>
 
 This will take you to a page that lists the different data routes. If you click on those routes, it will take you to pages that describe different parameters associated with the chosen route. Let's take a breather though and answer some questions.
 
@@ -239,4 +239,4 @@ Once you have your dataset and timescale downloaded, you can start your calculat
 2. When (Period) did Stenolaemata have their maximum genus diversity?
 3. When did the Stenolaemata have their largest decline in diversity? Was this gradual or sudden?
 4. When were the highest rates of extincton for Stenolaemata?
-5. Why does 
+5. Why does the first time interval show 100% origination and the last interval show 100% extinction?
