@@ -221,7 +221,7 @@ Once you have your dataset and timescale downloaded, you can start your calculat
 1. Download occurrences
 2. Download timescale
 3. Find the FADs and LADs for each genus. This is actually pretty straightforward using the apply family of functions. See the last section of [Getting Started with R](https://github.com/naheim/rTutorials/blob/master/manipulatedf.md).
-4. Set up vectors to hold the diversity, origination, and extinction values.
+4. Set up vectors to hold the diversity, origination, and extinction values. You can use the ``data.frame()`` function to combine your FADs and LADs into a single data frame where each row is the FAD and LAD of a single genus.
 5. Write a loop that will:
 	* Subset all extant genera in time interval.
 	* Count the number of extant genera in time interval.
