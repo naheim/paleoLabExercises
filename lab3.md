@@ -221,16 +221,17 @@ Once you have your dataset and timescale downloaded, you can start your calculat
 1. Download occurrences
 2. Download timescale
 3. Find the FADs and LADs for each genus. This is actually pretty straightforward using the apply family of functions. See the last section of [Getting Started with R](https://github.com/naheim/rTutorials/blob/master/manipulatedf.md).
-4. Set up vectors to hold the diversity, origination, and extinction values. You can use the ``data.frame()`` function to combine your FADs and LADs into a single data frame where each row is the FAD and LAD of a single genus.
-5. Write a loop that will:
+4. You can use the ``data.frame()`` function to combine your FADs and LADs into a single data frame where each row is the FAD and LAD of a single genus.
+5. Set up vectors to hold the diversity, origination, and extinction values.
+6. Write a loop that will:
 	* Subset all extant genera in time interval.
 	* Count the number of extant genera in time interval.
 	* Count the number of genera that go extinct in interval.
 	* Count the number of genera that originate in interval.
 	* Compute percent origination and extinction.
 	* *Don't forget to save the appropriate count and calculations to the appropriate vectors*
-6. Plot diversity over time. Be sure to have nice axis labels and the x-axis in the proper order.
-7. Plot origination and extinction over time. For this, the ``lines()`` function will be helpful. It adds lines to existing plots without overwriting them. As always, pay attention to your axes and labels. Also note that if you call ``quartz()`` before making you second plot, it will open a new plot window for your second graph.
+7. Plot diversity over time. Be sure to have nice axis labels and the x-axis in the proper order.
+8. Plot origination and extinction over time. For this, the ``lines()`` function will be helpful. It adds lines to existing plots without overwriting them. As always, pay attention to your axes and labels. Also note that if you call ``quartz()`` before making you second plot, it will open a new plot window for your second graph.
 
  
 
