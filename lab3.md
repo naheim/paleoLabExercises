@@ -123,7 +123,7 @@ https://paleobiodb.org/data1.2/colls/list.tsv?datainfo&rowcount&base_name=Abra,A
 
 #### Exercise Questions 3
 
-For the following questions generate the appropriate URL for the following data queries.
+For the following questions generate the appropriate URL for the following data queries. *You may find it helpful to read through the help by clicking on the question mark icons*.
 
 1. What is the appropriate URL for downloading all occurrences of *Ambonychia* in the Lexington Limestone as a JSON?
 
@@ -197,7 +197,7 @@ https://paleobiodb.org/data1.2/colls/list.csv?base_name=Mammut&interval=Pliocene
 
 5. Look through the service documentation for the appropriate route (based on your answer to Question 2). Find out how to extend the age search to range from the Miocene Epoch through to the Pleistocene Epoch. Give the new data query URL.
 
-6. I want the data query to show me the paleocoordinates (i.e., paleolatitude and paleolongitude) of each data point. Give the updated data query URL.
+6. You want the data query to show me the paleocoordinates (i.e., paleolatitude and paleolongitude) of each data point. Give the updated data query URL.
 
 ## Diversity, Origination and Extinction in R
 In this final part of the lab exercise, you will construct a diversity curve and calculate origination and extinction rates for the bryozoan class Stenolaemata. 
@@ -214,7 +214,7 @@ Before you begin analyses, you also want to download a timescale. You can do thi
 https://paleobiodb.org/data1.2/intervals/list.tsv?scale=1&level=5
 ````
 
-For this exercise you will make two plots. One for diversity, calculated simply as the number genera extant during each time bin. The second plot will have both origination and extinction rates. For purposes of this lab exercise, you will calculate rates of origination and extinction as percents. This is probably the most commonly use metric, but there are others. Percent rates have the advantages of being simple to use and unless diversity is very small, percentages are robust to variations in sample size.
+For this exercise you will make two plots. One for diversity, calculated simply as the number genera extant during each time bin. The second plot will have both origination and extinction rates. For purposes of this lab exercise, you will calculate rates of origination and extinction as percents. This is probably the most commonly use metric, but there are others. Percent rates have the advantages of being simple to use and unless diversity is very small, percentages are robust to variations in sample size. On a plot depicting more than one type of data (e.g., origination & extinction), you will want to include a legend. Practice using google to figure out how to add a legend.
 
 Once you have your dataset and timescale downloaded, you can start your calculations. Here are the steps you need to take in your code:
 
