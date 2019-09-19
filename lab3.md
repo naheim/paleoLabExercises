@@ -238,5 +238,5 @@ Once you have your dataset and timescale downloaded, you can start your calculat
 1. How many Stenolaemata genera and genus-level occurrences are in the PBDB?
 2. When (Period) did Stenolaemata have their maximum genus diversity?
 3. When did the Stenolaemata have their largest decline in diversity? Was this gradual or sudden?
-4. When were the highest rates of extincton for Stenolaemata?
+4. When were the highest rates of extinction for Stenolaemata?
 5. Why does the first time interval show 100% origination and the last interval show 100% extinction?
