@@ -167,7 +167,7 @@ The following figure deconstructs each element of this query.
 
 <a href="url"><img src="lab3Figs/API.png" align="center" height="600" width="750" ></a>
 
-The first half of the query, before the **?** is fairly straightforward because there are only a few possible variations. However, the **parameters** that come afterwards can become quite cumbersome because there are many varieties of them, and many of them will change depending on what type of data you are using (i.e., collections vs. occurrences). You will need to use the documentation to see a full list of the possible paramters.
+The first half of the query, before the **?** is fairly straightforward because there are only a few possible variations. However, the **parameters** that come afterwards can become quite cumbersome because there are many varieties of them, and many of them will change depending on what type of data you are using (i.e., collections vs. occurrences). You will need to use the documentation to see a full list of the possible parameters.
 
 + [Occurrences Parameters](https://paleobiodb.org/data1.2/occs/list_doc.html)
 + [Collections Parameters](https://paleobiodb.org/data1.2/colls/list_doc.html)
