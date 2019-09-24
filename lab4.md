@@ -35,7 +35,7 @@ Data Type | Definition
 
 If you scroll down, you will see the four major projects currently part of Macrostrat.
 
-## Macrostrat Units
+## Macrostrat Units & Columns
 
 Click on the *Search* button near underneath the Macrostrat stats on the splash page.
 
@@ -58,9 +58,6 @@ Search for 'Hindsville' in the search bar at the upper right. This will take you
 5. What proportion of the Hindsville is standstone?
 
 6. What are the Prevalent taxa found in the Hindsville?
-
-
-## Macrostrat Columns
 
 Click on the gray polygon that contains the city of Fayetteville. This will take you to the summary page for that column.
 
