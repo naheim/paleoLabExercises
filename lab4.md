@@ -35,7 +35,7 @@ Data Type | Definition
 
 If you scroll down, you will see the four major projects currently part of Macrostrat.
 
-## Macrostrat Columns
+## Macrostrat Units
 
 Click on the *Search* button near underneath the Macrostrat stats on the splash page.
 
@@ -45,31 +45,35 @@ The page you get will be a randomly selected macrostrat column, and should look 
 You are presented with the location of the stratigraphic column on a maps as wells as some summary statistics about the column, including the numbers of units and packages, the distribution of lithologies, age range, total thickness, and area. You are also presented with the number of collections. This refers to the the number of paleobiology Database collections that have been matched to units in the column.
 
 #### Exercise Questions 1
+Search for 'Hindsville' in the search bar at the upper right. This will take you to the summary page for the units named Hindsville.
 
-Let's take a look at a great scientific paper by Steven M. Holland and Mark E. Patzkowsky. 
+1. Where is the Hindsville located?
 
-<a href="url"><img src="lab3Figs/Figure3.png" align="center" height="450" width="500" ></a>
+2. What age is the Hindsville? Give the period and stage names.
 
-Use the reference search tool to look up collections associated with this paper and answer the following questions.
+3. How thick is the Hindsville?
 
-1. How many collections are associated with this references?
+4. Why are there three columns that have Hindsville units?  
 
-2. What is the reference id number for the article? 
+5. What proportion of the Hindsville is standstone?
 
-Once you have answered the above questions, click the **view collections** hyperlink to see a print out of the collections associated with the study.
+6. What are the Prevalent taxa found in the Hindsville?
 
-<a href="url"><img src="lab3Figs/Figure4.png" align="center" height="450" width="500" ></a>
 
-Click on collection no. **72438**. Answer the following questions about this collection.
+## Macrostrat Columns
 
-<a href="url"><img src="lab3Figs/Figure5.png" align="center" height="450" width="500" ></a>
+Click on the gray polygon that contains the city of Fayetteville. This will take you to the summary page for that column.
 
-3. The first taxon in the taxonomic list is *Rafinesquina alternata*. Next to the taxonomic name is the citation (Conrad 1830), what is the significance of this citation?
+7. What is the name of the column?
 
-4. What is the *class*, *order*, *family*, *genus*, and *species* name of the second taxon in the taxonomic list?
+8. How thick is the column?
 
-5. In what County was the data collected?
+9. How many PBDB collections have been matched to units in this column and what are the prevalent taxa?
 
-6. What age (Period) is the data from?
+At the bottom of the page is a graphical rendering of the units within the column.
 
-7. What is the geologic formation where the data was found?
+10. How many packages are in this column and how are the delineated on the figure?
+
+11. How many units have PBDB collections?
+
+12. What are the units above and below the Hindsville? Are each of these units in the same or different packages?
