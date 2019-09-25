@@ -104,6 +104,8 @@ Use the API to download the data. For our analyses here we will only be examinin
 
 Macrostrat only offers two output formats for the sections route: JSON and csv. You can read JSON into R, but it will require additional processing. Since csv is essentially a "native" format for R, we'll use that. Make sure you include the parameter *format* and set the value to *csv*. Last week when working with PBDB downloads in R, we downloaded files with tab-delimited values (tsv). To get csv files, you'll need to use the ``read.csv`` instead of ``read.tsv()``, otherwise the two functions work the same.
 
+Once you have downloaded your pacages, look at the column headers using either ``head()`` or ``colnames()``. Make sure you understand what information is in each of the columns.
+
 ### Step 2: Download the timescale
 As in the PBDB, Macrostrat also has information on the geological timescale. Use the *intervals* route to get the time intervals of interest. You will need to specify a timescale. The timescale we are interested in is the *international ages*. Use the *defs* route to see the other available timescales. Also be sure to specify that you want a csv.
 
@@ -123,12 +125,70 @@ e.kingii <- read.delim(myWebAddress) # download the data--it should work
 e.kingii
 ````
 
-* Download pbdb collections
-* Plot history of rock quantity
-* Plot number of collections
-* Plot proportion of matched packages
+Once you have downloaded your timescale, look at the column headers using either ``head()`` or ``colnames()``. Notice that the column names are slightly different from those used by the PBDB. Make sure you understand what information is in each of the columns.
+
+### Step 3: Plot the number of packages, PBDB collections, and proportion of matched packages over time
+To to this you will draw on what you learned last week. 
+
+1. Set up three vectors (or one data frame) to hold your results.
+2. Write a loop that steps through each time interval.
+	* Count the number of packages in each time interval.
+	* Count the number of PBDB collections in each time interval.
+	* Calculate the proportion of packages that have PBDB collections.
+3. Make one plot each for each of the three quantities you calculated inside the loop. **Be sure to write meaningful xais labels!!!**
+
+####\*\*R PRO TIP 1
+````r
+# It is often useful to add names to the values in your vectors. 
+# Because your vectors correspond to the rows of the timescale, you can use the interval names!
+
+# make my vectors to hold calculations made for each time interval
+nPkg <- vector(mode="numeric", length=nrow(timescale)) # set up a vector initialized with zeros
+names(nPkg) <- timescale$name # add names to each value
+nPkg # notice now that each place in the vector has a name that corresponds to the values in timescale$name!
+
+# to set up other vectors you can actually just set them equal to the empty vector you just make rather than wiring out the code over and over.
+nColl <- nPkg 
+nColl # notice that now nColl is a vector initialized with zeros and time scale names.
+
+# This will be useful because, lets say you want to know which interval has the most paleobiology database collections. 
+# Once you've counted the number of collections in each interval and stored them in nColl, you can use max(nColl) to get both the max value and the interval that that value occurs in!
+````
+
+####\*\*R PRO TIP 2
+````r
+# You can combine multiple plots into a single plot window!
+# Here's how.
+
+# Open a new plot window, and set the size
+quartz(height=6, width=12) # a window 6 inches high by 12 inches wide
+
+# partition the window into a grid with 1 row and 3 columns
+# this makes 3 equal-sized plot frames arranged next to each other
+par(mfrow=c(1,3)) # there are many, many plot options you can control with par()
+
+# lets make up some data
+x <- rnorm(1000) # 1000 values randomly drawn from a normal distribution
+y <- runif(1000) # 1000 values randomly drawn from a uniform distribution
+z <- x * y # the product of x and y
+
+# make your first plot
+hist(x) # a histogram of x
+
+# make your second plot, by calling a plotting command, you automatically move to the next plot frame
+plot(x, y, xlab='Normal distribution', ylab='Uniform distribution') # note that here I made nicer axis labels
+
+# make your third plot
+boxplot(z, ylab='Normal x Uniform') # box and whisker plot
+````
 
 
-The best way to think about using an API is to imagine it as a map to all the data stored online. You need to use this map to give the computer directions on how to find the particular data you want and access it. When we give directions to a location in the real world, we generally do so in two ways. We either give geographic coordinates (i.e., latitude, longitude, elevation) that specify the destination, or a set of routes to get somewhere (e.g., Take I-90 E to Chicago, then I-80 W to Joliet).
-
-When we access data in R via **subscripting** (`Object[ ]`), we are using a coordinate system to point out the data in our object. In contrast, when we access data through an API we are defining a **route**. In fact, route is the formal terminology. Depending on the size of an API there may be dozens of routes, which may feel overwhelming at first. However, remember that a car map has thousands or hundreds of thousands of roads, most of which you will never travel upon, but you still know how to use a map. It is the same way with an API.
+#### Exercise Questions 2
+1. How many sedimentary marine packages are there in North American and the Caribbean?
+2. What is the total number of PBDB collections?
+3. What time interval has the most packages?
+4. What time interval has the most collections?
+5. How are the numbers of packages and numbers of collections over time similar and different?
+6. What time interval has the highest proportion of packages with PBDB collections? 
+7. Which interval has the lowest proportion of PBDB collections?
+8. How does the proportion of the fossil record change over time? What does this say about the quality of the fossil record?
