@@ -186,9 +186,11 @@ boxplot(z, ylab='Normal x Uniform') # box and whisker plot
 #### Exercise Questions 2
 1. How many sedimentary marine packages are there in North American and the Caribbean?
 2. What is the total number of PBDB collections?
-3. What time interval has the most packages?
-4. What time interval has the most collections?
+3. Which time interval has the most packages?
+4. Which time interval has the most collections?
 5. How are the numbers of packages and numbers of collections over time similar and different?
-6. What time interval has the highest proportion of packages with PBDB collections? 
+6. Which time interval has the highest proportion of packages with PBDB collections? 
 7. Which interval has the lowest proportion of PBDB collections?
-8. How does the proportion of the fossil record change over time? What does this say about the quality of the fossil record?
+8. Why do you think this interval has the lowest? (Hint: you may want to think about the other EOS courses you're taking this semester.)
+9. How does the proportion of the fossil record change over time? 
+10. What do changes in the proportion of fossiliferous packages say about the quality of the fossil record?
