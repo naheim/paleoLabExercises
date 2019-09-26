@@ -94,13 +94,13 @@ We want to download all the data for North America and the Caribbean. In order t
 
 **Paste this URL into your browser and make note of the IDs for the North America and Caribbean projects.**
 
-## Plotting marine rocks in North America & Caribbean
-Now we want to look at the history of marine sedimentation and the fossil record in North America and the Caribbean. You will do this in R drawing on your knowledge from last week's lab on using APIs to plot data in R. 
+## Plotting marine & terrestrial rocks in North America & the Caribbean
+Now we want to look at the history of marine and terrestrial sedimentation and the fossil record in North America and the Caribbean. You will do this in R drawing on your knowledge from last week's lab on using APIs to plot data in R. 
 
 In addition to answering the questions below, you will also need to submit a .r script containing your code for downloading data, calculations, and generating your plots. This script should be well documented (i.e., explanatory comments) and should run without error. You may need to review loops and plotting from [Getting Started with R](https://github.com/naheim/rTutorials/blob/master/manipulatedf.md) and you will use skills you learned last week in [Lab 3](lab3.md).
 
 ### Step 1: Download marine packages from Macrostrat
-Use the API to download the data. For our analyses here we will only be examining packages in North America and the Caribbean that contain only sedimentary rocks of marine origin. For historical reasons, the route to examine packages is called sections. Look at the documentation for the *sections* route to construct your call to the API. The parameters you want to retrieve only marine and only sedimentary rocks are *environ_class* and *lith_class*. If you are unsure what the parameter values should be, you can look up the possible values in the *defs* route (but your first guess will probably work :wink:). 
+Let's start with *marine* packages, and use the API to download the data. For our analyses here we will only be examining packages in North America and the Caribbean that contain only sedimentary rocks of marine origin. For historical reasons, the route to examine packages is called sections. Look at the documentation for the *sections* route to construct your call to the API. The parameters you want to retrieve only marine and only sedimentary rocks are *environ_class* and *lith_class*. If you are unsure what the parameter values should be, you can look up the possible values in the *defs* route (but your first guess will probably work :wink:). 
 
 Macrostrat only offers two output formats for the sections route: JSON and csv. You can read JSON into R, but it will require additional processing. Since csv is essentially a "native" format for R, we'll use that. Make sure you include the parameter *format* and set the value to *csv*. Last week when working with PBDB downloads in R, we downloaded files with tab-delimited values (tsv). To get csv files, you'll need to use the ``read.csv`` instead of ``read.tsv()``, otherwise the two functions work the same.
 
@@ -136,6 +136,10 @@ To to this you will draw on what you learned last week.
 	* Count the number of PBDB collections in each time interval.
 	* Calculate the proportion of packages that have PBDB collections.
 3. Make one plot each for each of the three quantities you calculated inside the loop. **Be sure to write meaningful xais labels!!!**
+
+### Step 4: Plot the number of terrestrial packages, PBDB collections, and proportion of matched packages over time
+Repeat steps 1 and 3 above. You will need to change your call to the sections route of the API to return non-marine rather than marine sedimentary rocks. Also, you've already downloaded the timescale (step 2) so you won't need to do that agin. In your code, copy and paste will be helpful. 
+
 
 ####\*\*R PRO TIP 1
 ````r
@@ -184,13 +188,24 @@ boxplot(z, ylab='Normal x Uniform') # box and whisker plot
 
 
 #### Exercise Questions 2
-1. How many sedimentary marine packages are there in North American and the Caribbean?
-2. What is the total number of PBDB collections?
-3. Which time interval has the most packages?
-4. Which time interval has the most collections?
-5. How are the numbers of packages and numbers of collections over time similar and different?
-6. Which time interval has the highest proportion of packages with PBDB collections? 
-7. Which interval has the lowest proportion of PBDB collections?
+1. How many sedimentary marine and non-marine packages are in North American and the Caribbean?
+
+2. What are the total numbers of marine and non-marine PBDB collections?
+
+3. Which time interval has the most marine packages?
+
+4. Which time interval has the most non-marine collections?
+
+5. How are the numbers of marine packages and numbers of marine PBDB collections over time similar and different?
+
+6. Which time intervals have the highest proportions of marine and non-marine packages with PBDB collections? 
+
+7. Which interval has the lowest proportion of marine PBDB collections?
+
 8. Why do you think this interval has the lowest? (Hint: you may want to think about the other EOS courses you're taking this semester.)
-9. How does the proportion of the fossil record change over time? 
-10. What do changes in the proportion of fossiliferous packages say about the quality of the fossil record?
+
+9. Why do you think the trends for the numbers of marine and non-marine packages are different? Why does each have the shape that id does?
+
+10. How do the proportions of the fossil record change over time in marine and non-marine systems? 
+
+11. What do changes in the proportions of fossiliferous packages say about the quality of the marine and non-marine fossil records?
