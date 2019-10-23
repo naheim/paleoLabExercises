@@ -15,6 +15,15 @@ The New Scotland Formation is Early Devonian in age, belongs to the Helderberg G
 
 There are a variety of ways to think about diversity. The simplest, and most common, is to think of diversity simply as the number of species (or genera, families, etc.). This metric is called **species richness** or just **richness** (S). This is the main metric we will use in this lab.
 
+#### Exercise Questions 1
+1. How many totad species did we find in the New Scotland Formation? How many individuals?
+2. What is the total diversity of each of the six beds we sampled from the New Scotland Formation?
+3. How does diversity change upsection, if at all (remeber bed 6 was at the base of the section)?
+4. Use rarefaction, as we did in class, to determine the diversity of each of the six beds at a common sample size. What is the common sample size? What is the rarefied diversity of each bed?
+5. Write an R script that shows your calculations, including the rarefaction.
+
+## Additive Diversity Partitioning
+
 It is interesting to know how many species there are in a sample, bed, formation, etc. If we have this information, we can then make comparisons (perhaps using [rarefaction](https://github.com/naheim/rTutorials/blob/master/rarefaction.md) or some other sample standardization) between samples, formation, etc. However, we might also want to know how diversity changes through space or time. We can do this by taking a hierarchical approach to measuring biodiversity. 
 
 Modern ecologists often consider the diversity at multiple levels. Alpha diversity (&alpha;) is defined as the diversity (simple richness or some other diversity measure) of a local sample taken from a homogeneous habitat, gamma diversity (&gamma;) is the diversity of a regional sample that includes multiple habitats, and beta diversity (&beta;) describes how diversity increases from the &alpha; level to the &gamma; level as samples are pooled. For example the number of ant species (:ant:) on Tuft's Academic Quad is a measure of &alpha; and &gamma; would be the total number of ant species in all of Middlesex County. Beta diversity, then is the diversity gained by pooling all of the local habitats in Middlesex County.
@@ -39,13 +48,12 @@ Calculate &alpha;, &beta;<sub>1</sub>, and &beta;<sub>2</sub> for the New Scotla
 
 ![Figure 1 from Holland 2010](lab7bFigs/Holland2010Fig1.png)
 
-#### Exercise Questions 1
-Search for 'Hindsville' in the search bar at the upper right. This will take you to the summary page for the units named Hindsville.
+#### Exercise Questions 2
 
 1. What are &alpha;, &beta;<sub>1</sub>, and &beta;<sub>2</sub>?
 2. Which contributes most to total diversity?
-3. What what it means for that level to contribute most to diversity?
-4. Write an R script that calculates &alpha;, &beta;<sub>1</sub>, and &beta;<sub>2</sub> from the New Scotland Data and plots these values as bar plot (as in published examples above).
+3. What does it mean for that level to contribute most to diversity?
+4. Add to your R script code that calculates &alpha;, &beta;<sub>1</sub>, and &beta;<sub>2</sub> from the New Scotland Data and plots these values as bar plot (as in published examples above). (Hint use ``barplot()``.)
 
 
 ## Evenness
@@ -67,7 +75,13 @@ The minimum value of &lambda; is 1/*S*, and this is when all species have the sa
 We can also apply additive diversity partitioning to measures of evenness, including Simpson's D. 
 
 
+#### Exercise Questions 3
 
+1. What are &alpha;, &beta;<sub>1</sub>, and &beta;<sub>2</sub>?
+2. Overall, do you think the New Scotlant has high evenness or low eveness?
+3. Which contributes most to total evenness?
+4. What what it means for that level to contribute most to diversity?
+5. Add to your R script code that calculates &alpha;, &beta;<sub>1</sub>, and &beta;<sub>2</sub> for Simpson's D and plots these values as bar plot (as in published examples above).
 
 
 
