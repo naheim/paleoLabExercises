@@ -9,6 +9,12 @@ The purpose of this lab is to ...
 
 ## Introduction
 
+* Richness
+* Rarefaction
+* Evenness
+* Beta Diversity
+* Additive Diversity Partitioning
+
 
 ![strat column](lab7bFigs/StratColumn.png)
 *Genarliaed stratigraphic column of the Lower Devonian (and Late Silurian) Helderberg Group in Eastern New York. Our samples came from the New Scotland Formation. (Wilson 2014* Field Guide to the Devonian Fossils of New York*).*
