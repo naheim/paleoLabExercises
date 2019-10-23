@@ -35,18 +35,24 @@ We are going to calculate the additive diversity partitioning for our field samp
 
 In each instance of &beta;, it is calculated as the total diversity of the level minus the average of samples within the level. In our case, &beta;<sub>2</sub> is the difference between total richness and the mean diversity of the six beds. To calculate &beta;<sub>1</sub>, first calculate the &beta; diversity for each bed as the total bed diversity minus the average diversity of the three samples within the bed. &beta;<sub>1</sub> is then the average &beta; of all six sampled beds.
 
-Calculate &alpha;, &beta;<sub>1</sub>, and &beta;<sub>2</sub> for the New Scotland data and suing S and the measure of diversity.
+Calculate &alpha;, &beta;<sub>1</sub>, and &beta;<sub>2</sub> for the New Scotland data and suing S and the measure of diversity. It may be helpful to draw a diagram similar to the one below from Holland (2010) to help you keep your diversities and levels straight (note yours won't have as many levels).
+
+![Figure 1 from Holland 2010](lab7bFigs/Holland2010Fig1.png)
 
 #### Exercise Questions 1
 Search for 'Hindsville' in the search bar at the upper right. This will take you to the summary page for the units named Hindsville.
 
-1. 
+1. What are &alpha;, &beta;<sub>1</sub>, and &beta;<sub>2</sub>?
+2. Which contributes most to total diversity?
+3. What what it means for that level to contribute most to diversity?
+4. Write an R script that calculates &alpha;, &beta;<sub>1</sub>, and &beta;<sub>2</sub> from the New Scotland Data and plots these values as bar plot (as in published examples above).
 
 
 ## Evenness
+Another way to think about 
 
-
-
+![Evenness Illustration](lab7bFigs/biodiversity_med.jpeg)
+*(Fig. Credit: https://ib.bioninja.com.au/options/option-c-ecology-and-conser/c4-conservation-of-biodiver/biodiversity.html)*
 
 
 
