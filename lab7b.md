@@ -49,13 +49,22 @@ Search for 'Hindsville' in the search bar at the upper right. This will take you
 
 
 ## Evenness
-Another way to think about 
+Another aspect of biodiversity is evenness, which is a measure of how numerically similar species are within a community. The figure blow depicts two communities of trees. Both communities have the same richness (S): four species. However, they are very different in evenness. Community 1 has high evenness because all four species have the same numbers of individuals while community 2 is low evenness because one species has many more individuals than the others.
 
 ![Evenness Illustration](lab7bFigs/biodiversity_med.jpeg)
 *(Fig. Credit: https://ib.bioninja.com.au/options/option-c-ecology-and-conser/c4-conservation-of-biodiver/biodiversity.html)*
 
+There are many different evenness metrics. The one we will use here is Simpson's D. Simpson's D is derived from Simpson's concentration (&lambda;), which is the probability that two randomly chosen individuals from a community belong to the same species. The equation is below.
 
+![Simpson's Lambda Equation](lab7bFigs/simpsonLambda.png)
 
+where *p<sub>i</sub>* is the proportion of the community represented by species *i* and *n* is the total number of species.
+
+The minimum value of &lambda; is 1/*S*, and this is when all species have the same abundance. Lambda is considered a measure of concentration because when it's low diversity is spread out among all the species and when it's high diversity is concentrated in a few. To convert Simpson's &lambda; into Simpson's D, a measure of eveness, we simply subtract &lambda; from one.
+
+*D = 1 - &lambda;*
+
+We can also apply additive diversity partitioning to measures of evenness, including Simpson's D. 
 
 
 
