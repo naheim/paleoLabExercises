@@ -10,6 +10,9 @@ The purpose of this lab is to learn about biodiversity by measuring it in the sa
 ## Introduction
 The New Scotland Formation is Early Devonian in age, belongs to the Helderberg Group, and is exposed in eastern New York. (See the figure below)
 
+![strat column](lab7bFigs/StratColumn.png)
+*Genarliaed stratigraphic column of the Lower Devonian (and Late Silurian) Helderberg Group in Eastern New York. Our samples came from the New Scotland Formation. (Wilson 2014* Field Guide to the Devonian Fossils of New York*).*
+
 There are a variety of ways to think about diversity. The simplest, and most common, is to think of diversity simply as the number of species (or genera, families, etc.). This metric is called **species richness** or just **richness** (S). This is the main metric we will use in this lab.
 
 It is interesting to know how many species there are in a sample, bed, formation, etc. If we have this information, we can then make comparisons (perhaps using [rarefaction](https://github.com/naheim/rTutorials/blob/master/rarefaction.md) or some other sample standardization) between samples, formation, etc. However, we might also want to know how diversity changes through space or time. We can do this by taking a hierarchical approach to measuring biodiversity. 
@@ -32,25 +35,24 @@ We are going to calculate the additive diversity partitioning for our field samp
 
 In each instance of &beta;, it is calculated as the total diversity of the level minus the average of samples within the level. In our case, &beta;<sub>2</sub> is the difference between total richness and the mean diversity of the six beds. To calculate &beta;<sub>1</sub>, first calculate the &beta; diversity for each bed as the total bed diversity minus the average diversity of the three samples within the bed. &beta;<sub>1</sub> is then the average &beta; of all six sampled beds.
 
-
-* 
-
-
-
-* Evenness
-* Beta Diversity
-* Additive Diversity Partitioning
-
-
-![strat column](lab7bFigs/StratColumn.png)
-*Genarliaed stratigraphic column of the Lower Devonian (and Late Silurian) Helderberg Group in Eastern New York. Our samples came from the New Scotland Formation. (Wilson 2014* Field Guide to the Devonian Fossils of New York*).*
-
-
+Calculate &alpha;, &beta;<sub>1</sub>, and &beta;<sub>2</sub> for the New Scotland data and suing S and the measure of diversity.
 
 #### Exercise Questions 1
 Search for 'Hindsville' in the search bar at the upper right. This will take you to the summary page for the units named Hindsville.
 
 1. 
+
+
+## Evenness
+
+
+
+
+
+
+
+
+
 
 
 
