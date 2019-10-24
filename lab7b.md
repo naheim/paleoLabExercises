@@ -1,3 +1,8 @@
+[//]: # (Add similarity)
+[//]: # (Double check Dimpson's D sums to total--note max is 1, more evenness in intro)
+[//]: # (simpler metrics rather than ADP??)
+
+
 # Lab Exercise 7b: Community Diversity in the Early Devonian New Scotland Formation (samples collected on our field trip). 
 
 ## Instructions
@@ -119,7 +124,4 @@ We can also apply additive diversity partitioning to measures of evenness, inclu
 3. Which level contributes most to total evenness?
 4. What does it mean for that level to contribute most to evenness?
 5. Add to your R script code that calculates &alpha;, &beta;<sub>1</sub>, and &beta;<sub>2</sub> for Simpson's D and plots these values as bar plot (as in published examples above).
-
-[//]: # (This syntax works like a comment, and won't appear in any output.)
-
 
