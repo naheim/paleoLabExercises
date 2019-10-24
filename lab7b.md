@@ -11,7 +11,7 @@ The purpose of this lab is to learn about biodiversity by measuring it in the sa
 The New Scotland Formation is Early Devonian in age, belongs to the Helderberg Group, and is exposed in eastern New York. (See the figure below)
 
 ![strat column](lab7bFigs/StratColumn.png)
-*Genarliaed stratigraphic column of the Lower Devonian (and Late Silurian) Helderberg Group in Eastern New York. Our samples came from the New Scotland Formation. (Wilson 2014* Field Guide to the Devonian Fossils of New York*).*
+*Genarliaed stratigraphic column of the Lower Devonian (and Late Silurian) Helderberg Group in Eastern New York. Our samples came from the New Scotland Formation. (Wilson 2014* Field Guide to the Devonian Fossils of New York).
 
 There are a variety of ways to think about diversity. The simplest, and most common, is to think of diversity simply as the number of species (or genera, families, etc.). This metric is called **species richness** or just **richness** (S). This is the main metric we will use in this lab.
 
@@ -53,7 +53,7 @@ lapply(beds, colSums)
 ````
 
 #### Exercise Questions 1
-1. How many total species did we find in the New Scotland Formation? How many individuals?
+1. How many total genera did we find in the New Scotland Formation? How many individuals?
 2. What is the total diversity of each of the six beds we sampled from the New Scotland Formation?
 3. How does diversity change up-section, if at all (remember bed 6 was at the base of the section)?
 4. Use rarefaction, as we did in class, to determine the diversity of each of the six beds at a common sample size. What is the common sample size? What is the rarefied diversity of each bed?
