@@ -20,11 +20,45 @@ You can download the genus counts here: [https://raw.githubusercontent.com/nahei
 
 In this data frame, the first row is the bed number, the second column is the sample number, and the remainder of the columns are genus counts.
 
-You can read this data
+You can read this data file directly into R from GitHub. 
+
+```` r
+newScotland <- read.delim(file="https://raw.githubusercontent.com/naheim/paleoLabExercises/master/lab7bFigs/NewScotlandData.txt")
+````
+
+Look at the file and become familiar with its structure. The first column is a unique for each sample, the second column is an identifier for each bed (notice it repeats), and the third column (which is probably not necessary) indicates the sample within the bed.
+
+After reading in the data frame, my recommendation is to split the data frame into two, with one data frame holding the sample information and a second holding the species counts.
+
+```` r
+sampleInfo <- newScotland[,1:3]
+genusCounts <- newScotland[,-(1:3)]
+````
+The ``by()`` function will probably be helpful. It works like the apply family of functions, but takes a data frame or matrix as it's main argument rather than a vector. This is how you would use by to get the number of specimens in each sample, grouped by bed.
+
+```` r
+by(genusCounts, sampleInfo$Bed, rowSums)
+````
+Here is how you would use ``by()`` to get the number of specimens for each genus in each bed.
+
+```` r
+by(genusCounts, sampleInfo$Bed, colSums)
+````
+ 
+As an alternative, you can split the data frame into a *list* of data frames using the ``split()`` function.
+
+```` r
+beds <- split(genusCounts, sampleInfo$Bed)
+
+# access individual beds by their bed name
+beds$RHR6 # this is the sixth bed
+````
+
+
 #### Exercise Questions 1
-1. How many totad species did we find in the New Scotland Formation? How many individuals?
+1. How many total species did we find in the New Scotland Formation? How many individuals?
 2. What is the total diversity of each of the six beds we sampled from the New Scotland Formation?
-3. How does diversity change upsection, if at all (remeber bed 6 was at the base of the section)?
+3. How does diversity change up-section, if at all (remember bed 6 was at the base of the section)?
 4. Use rarefaction, as we did in class, to determine the diversity of each of the six beds at a common sample size. What is the common sample size? What is the rarefied diversity of each bed?
 5. Write an R script that shows your calculations, including the rarefaction.
 
