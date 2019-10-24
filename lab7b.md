@@ -15,6 +15,12 @@ The New Scotland Formation is Early Devonian in age, belongs to the Helderberg G
 
 There are a variety of ways to think about diversity. The simplest, and most common, is to think of diversity simply as the number of species (or genera, families, etc.). This metric is called **species richness** or just **richness** (S). This is the main metric we will use in this lab.
 
+# The Data
+You can download the genus counts here: [https://raw.githubusercontent.com/naheim/paleoLabExercises/master/lab7bFigs/NewScotlandData.txt](https://raw.githubusercontent.com/naheim/paleoLabExercises/master/lab7bFigs/NewScotlandData.txt).
+
+In this data frame, the first row is the bed number, the second column is the sample number, and the remainder of the columns are genus counts.
+
+You can read this data
 #### Exercise Questions 1
 1. How many totad species did we find in the New Scotland Formation? How many individuals?
 2. What is the total diversity of each of the six beds we sampled from the New Scotland Formation?
