@@ -34,18 +34,7 @@ After reading in the data frame, my recommendation is to split the data frame in
 sampleInfo <- newScotland[,1:3]
 genusCounts <- newScotland[,-(1:3)]
 ````
-The ``by()`` function will probably be helpful. It works like the apply family of functions, but takes a data frame or matrix as it's main argument rather than a vector. This is how you would use by to get the number of specimens in each sample, grouped by bed.
-
-```` r
-by(genusCounts, sampleInfo$Bed, rowSums)
-````
-Here is how you would use ``by()`` to get the number of specimens for each genus in each bed.
-
-```` r
-by(genusCounts, sampleInfo$Bed, colSums)
-````
- 
-As an alternative, you can split the data frame into a *list* of data frames using the ``split()`` function.
+The ``split()`` function will probably be helpful. This function splits a data frame into a *list* fo data frames that you can then use the apply family of functions on--especially ``lapply()``. This is how you would use ``split()`` to break the larger data frame into individual data frames for each bed.
 
 ```` r
 beds <- split(genusCounts, sampleInfo$Bed)
@@ -53,7 +42,15 @@ beds <- split(genusCounts, sampleInfo$Bed)
 # access individual beds by their bed name
 beds$RHR6 # this is the sixth bed
 ````
+Here is how you would use ``lapply()`` to get the numbers of specimens in each sample, grouped by bed and the number of specimens of each genus, grouped by bed.
 
+```` r
+# number of specimens in each sample, grouped by bed
+lapply(beds, rowSums) 
+
+# number of specimens of each genus, grouped by bed
+lapply(beds, colSums) 
+````
 
 #### Exercise Questions 1
 1. How many total species did we find in the New Scotland Formation? How many individuals?
