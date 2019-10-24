@@ -88,7 +88,7 @@ Calculate &alpha;, &beta;<sub>1</sub>, and &beta;<sub>2</sub> for the New Scotla
 #### Exercise Questions 2
 
 1. What are &alpha;, &beta;<sub>1</sub>, and &beta;<sub>2</sub>?
-2. Which contributes most to total diversity?
+2. Which level contributes most to total diversity?
 3. What does it mean for that level to contribute most to diversity?
 4. Add to your R script code that calculates &alpha;, &beta;<sub>1</sub>, and &beta;<sub>2</sub> from the New Scotland Data and plots these values as bar plot (as in published examples above). (Hint use ``barplot()``.)
 
@@ -105,7 +105,7 @@ There are many different evenness metrics. The one we will use here is Simpson's
 
 where *p<sub>i</sub>* is the proportion of the community represented by species *i* and *n* is the total number of species.
 
-The minimum value of &lambda; is 1/*S*, and this is when all species have the same abundance. Lambda is considered a measure of concentration because when it's low diversity is spread out among all the species and when it's high diversity is concentrated in a few. To convert Simpson's &lambda; into Simpson's D, a measure of eveness, we simply subtract &lambda; from one.
+The minimum value of &lambda; is 1/*S*, and this is when all species have the same abundance. Lambda is considered a measure of concentration because when its low diversity is spread out among all the species and when its high diversity is concentrated in a few. To convert Simpson's &lambda; into Simpson's D, a measure of evenness, we simply subtract &lambda; from one.
 
 *D = 1 - &lambda;*
 
@@ -115,8 +115,8 @@ We can also apply additive diversity partitioning to measures of evenness, inclu
 #### Exercise Questions 3
 
 1. What are &alpha;, &beta;<sub>1</sub>, and &beta;<sub>2</sub>?
-2. Overall, do you think the New Scotland has high evenness or low evenness?
-3. Which contributes most to total evenness?
+2. Overall, do you think the New Scotland has high evenness or low evenness and why?
+3. Which level contributes most to total evenness?
 4. What what it means for that level to contribute most to diversity?
 5. Add to your R script code that calculates &alpha;, &beta;<sub>1</sub>, and &beta;<sub>2</sub> for Simpson's D and plots these values as bar plot (as in published examples above).
 
