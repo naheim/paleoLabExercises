@@ -1,0 +1,768 @@
+tapply(tempOccur[, match(c('paleolng','paleolat'), colnames(tempOccur))], tempOccur$accepted_name, colSums)
+maxGCD <- function(x) {#
+	require(geosphere)#
+	coords <- unique(x)#
+	distances <- apply(x, 1, distGeo, x)#
+	upperDist <- distances[lower.tri(distances, diag = FALSE)]#
+	return(max(upperDist))#
+}
+sapply(tempOccur[, match(c('paleolng','paleolat'), colnames(tempOccur))], tempOccur$accepted_name, maxGCD)
+?sapply
+class(tempOccur[, match(c('paleolng','paleolat'), colnames(tempOccur))])
+tempOccur[, match(c('paleolng','paleolat'), colnames(tempOccur))]
+tempOccur$accepted_name
+i
+tapply(tempOccur[, match(c('paleolng','paleolat'), colnames(tempOccur))], tempOccur$accepted_name, maxGCD)
+tapply(tempOccur[, match(c('paleolng','paleolat'), colnames(tempOccur))], as.character(tempOccur$accepted_name), maxGCD)
+as.character(tempOccur$accepted_name)
+q()
+library(geosphere)#
+#
+# get Stenolaemata occurrences from PBDB#
+steno <- read.delim("https://paleobiodb.org/data1.2/occs/list.tsv?&base_name=Stenolaemata&idreso=lump_genus&show=class,paleoloc")#
+#
+# it's important to drop occurrences where the paleolocations are unknown#
+steno <- droplevels(subset(steno, !is.na(paleolng)))#
+#
+# Timescale excluding Pleistocene and Holocene#
+timescale <- read.delim("https://paleobiodb.org/data1.2/intervals/list.tsv?scale_level=5&min_ma=2.588")#
+nBins <- nrow(timescale)#
+#
+# generate data frame for genus-level information#
+# FAD, LAD, nPalocont, nOccur #
+#
+# this is a simple custom function that will count the number of uniqe values in a vector#
+nUnique <- function(x) {return(length(unique(x)))}#
+#
+# this is a custom function to calculate max great circle distance#
+maxGCD <- function(x) {#
+    require(geosphere)#
+    coords <- unique(x)#
+    distances <- apply(x, 1, distGeo, x)#
+    upperDist <- distances[lower.tri(distances, diag = FALSE)]#
+    return(max(upperDist))#
+}#
+#
+#calc. individual parameters of interst#
+genus <- levels(steno$accepted_name)#
+fad <- tapply(steno$max_ma, steno$accepted_name, max)#
+lad <- tapply(steno$min_ma, steno$accepted_name, min)#
+nOccur <- as.numeric(table(steno$accepted_name))#
+nPaleocont <- tapply(steno$geoplate, steno$accepted_name, nUnique)#
+#
+# stitch them all into a single data frame#
+genera <- data.frame(genus, fad, lad, nOccur, nPaleocont)#
+nGen <- nrow(genera)#
+#
+# Set up data frames to hold geographic range values for each genus in each Phanerozoic stage#
+paleoCont <- data.frame(matrix(NA, nrow=nBins, ncol=nGen, dimnames=list(timescale$interval_name, genera$genus)))#
+greatCirc <- paleoCont # can set equal to paleoCont because we haven't filled in any values yet.
+i <- 1
+# get occurrences from time interval#
+	tempOccur <- steno[steno$max_ma > timescale$min_ma[i] & steno$min_ma < timescale$max_ma[i],]#
+	paleoCont[i,] <- tapply(tempOccur$geoplate, tempOccur$accepted_name, nUnique)
+lapply(tempOccur[, match(c('paleolng','paleolat'), colnames(tempOccur))], tempOccur$accepted_name, maxGCD)
+head(temp_occur)
+head(tempOccur)
+?lapply
+by(tempOccur[, match(c('paleolng','paleolat'), colnames(tempOccur))], tempOccur$accepted_name, maxGCD)
+x <- by(tempOccur[, match(c('paleolng','paleolat'), colnames(tempOccur))], tempOccur$accepted_name, maxGCD)
+class(x)
+unlist(x)
+as.numeric(x)
+genera[119,]
+tempOccur
+tempOccur[tempOccur$accepted_name == 'Crisia',]
+x
+x[!is.na(x)]
+temp <- table(tempOccur$accepted_name)
+temp
+# Set up data frames to hold geographic range values for each genus in each Phanerozoic stage#
+paleoCont <- data.frame(matrix(NA, nrow=nBins, ncol=nGen, dimnames=list(timescale$interval_name, genera$genus)))#
+greatCirc <- paleoCont # can set equal to paleoCont because we haven't filled in any values yet.#
+# calculate geographic range #
+# the easiest, though not fastest in terms of computational time, is to set up a loop though each time interval, the use apply functions to calculate geographic ranges#
+for(i in 1:nBins) {#
+	# get occurrences from time interval#
+	tempOccur <- steno[steno$max_ma > timescale$min_ma[i] & steno$min_ma < timescale$max_ma[i],]#
+	#tabulate the number of unique paleocontinents for each genus#
+	paleoCont[i,] <- tapply(tempOccur$geoplate, tempOccur$accepted_name, nUnique)#
+	#tabulate the great circle distance for each#
+	#but first drop all genera that don't have at least three occurrences#
+	temp <- table(tempOccur$accepted_name)#
+	tempOccur <- tempOccur[is.element(tempOccur$accepted_name, names(temp[temp>=3])),] #
+	greatCirc[i,] <- as.numeric(by(tempOccur[, match(c('paleolng','paleolat'), colnames(tempOccur))], tempOccur$accepted_name, maxGCD))#
+}
+head(greatCirc)
+range(apply(greatCirc, 2, sum, na.rm=T))
+(apply(greatCirc, 2, sum, na.rm=T))
+ncol(greatCirc)
+paleoCont <- paleoCont[, apply(paleoCont, 2, sum, na.rm=T) > 0]#
+greatCirc <- greatCirc[, apply(greatCirc, 2, sum, na.rm=T) > 0]
+ncol(greatCirc)
+ncol(paleoCont)
+head(paleoCont)
+paleoCont[,1]
+paleoCont[,2]
+paleoCont[,3]
+NonNAindex <- which(!is.na(z))#
+firstNonNA <- min(NonNAindex)
+z <- paleoCont[,3]
+NonNAincex
+NonNAindex
+NonNAindex <- which(!is.na(z))#
+firstNonNA <- min(NonNAindex)
+NonNAindex
+firstNonNA
+x
+z
+x <- z
+NonNAindex <- which(!is.na(x))#
+	firstNonNA <- min(NonNAindex)#
+	lastNonNA <- max(NonNAindex)
+firstNonNA
+lastNonNA
+x[firstNonNA: lastNonNA &  is.na(x)]
+x[firstNonNA: lastNonNA]
+internalNAtoZero <- function(x) {#
+	NonNAindex <- which(!is.na(x)) # get non-na values#
+	firstNonNA <- min(NonNAindex) # find the index of the first non-NA#
+	lastNonNA <- max(NonNAindex) # find the index of the last non-NA#
+	tempRange <- x[firstNonNA:lastNonNA] # get full range, including NAs#
+	tempRange[is.na(tempRange &  is.na(x)] <- 0 # change NAs within range to 0#
+	x[firstNonNA:lastNonNA] <- tempRange # reset values in original vector#
+	return(x)#
+}
+internalNAtoZero <- function(x) {#
+	NonNAindex <- which(!is.na(x)) # get non-na values#
+	firstNonNA <- min(NonNAindex) # find the index of the first non-NA#
+	lastNonNA <- max(NonNAindex) # find the index of the last non-NA#
+	tempRange <- x[firstNonNA:lastNonNA] # get full range, including NAs#
+	tempRange[is.na(tempRange)] <- 0 # change NAs within range to 0#
+	x[firstNonNA:lastNonNA] <- tempRange # reset values in original vector#
+	return(x)#
+}
+head9apply(paleoCont, 2, internalNAtoZero)
+head(apply(paleoCont, 2, internalNAtoZero))
+paleoCont[,3]
+apply(paleoCont, 2, internalNAtoZero)[,3]
+i <- 1
+tempRange <- which(!is.na(scaledPaleoCont[,i])) # get index values of non-na values--the stratigraphic range#
+	fadIndex <- min(tempRange) # find the index of the first non-NA#
+	ladIndex <- max(tempRange) # find the index of the last non-NA
+scaledPaleoCont <- matrix(NA, nrow=100, ncol=ncol(paleoCont), dimnames=list(1:100, colnames(paleoCont)))#
+scaledGCD <- matrix(NA, nrow=100, ncol=ncol(greatCirc), dimnames=list(1:100, colnames(greatCirc)))
+tempRange <- which(!is.na(paleoCont[,i])) # get index values of non-na values--the stratigraphic range#
+	fadIndex <- min(tempRange) # find the index of the first non-NA#
+	ladIndex <- max(tempRange) # find the index of the last non-NA
+tempRange
+fadIndex
+tempRange <- which(!is.na(paleoCont[,i])) # get index values of non-na values--the stratigraphic range#
+	fadIndex <- max(tempRange) # find the index of the last non-NA#
+	ladIndex <- min(tempRange) # find the index of the first non-NA
+i <- 3
+tempRange <- which(!is.na(paleoCont[,i])) # get index values of non-na values--the stratigraphic range#
+	fadIndex <- max(tempRange) # find the index of the last non-NA#
+	ladIndex <- min(tempRange) # find the index of the first non-NA
+tempRange
+paleoCont <- apply(paleoCont, 2, internalNAtoZero) # apply function to columns#
+greatCirc <- apply(greatCirc, 2, internalNAtoZero) # apply function to columns
+tempRange <- which(!is.na(paleoCont[,i])) # get index values of non-na values--the stratigraphic range#
+	fadIndex <- max(tempRange) # find the index of the last non-NA#
+	ladIndex <- min(tempRange) # find the index of the first non-NA
+i
+tempRange
+fadAge <- timescale$max_ma[fadIndex]#
+	ladAge <- timescale$min_ma[ladIndex]
+fadAge
+ladAge
+seq(fadAge, ladAge, length.out=100)
+seq(fadAge, ladAge, length.out=101)
+rangProp <- seq(fadAge, ladAge, length.out=100)
+rangeProp <- seq(fadAge, ladAge, length.out=100)
+rangeProp
+timescale[timescale$max_ma > rangeProp,]
+which(timescale$max_ma >= rangeProp[1] & timescale$min_ma < rangeProp[1])
+timescale[78,]
+fadAge-ladAge
+rageProp-ladAge
+rangeProp-ladAge
+(rangeProp-ladAge)/(fadAge-ladAge)
+(rangeProp-fadAge)/(fadAge-ladAge)
+(rangeProp-ladAge)/(fadAge-ladAge)-1
+(rangeProp-fadAge)/(fadAge-ladAge)-1
+(rangeProp-fadAge)/(fadAge-ladAge)
+abs((rangeProp-fadAge)/(fadAge-ladAge))
+rangeInts <- seq(fadAge, ladAge, length.out=100)#
+	rangeProp <- abs((rangeInts-fadAge)/(fadAge-ladAge))
+raneInts
+rangeInts
+rangeInts <- seq(fadAge, ladAge, length.out=101)#
+	rangeProp <- abs((rangeInts-fadAge)/(fadAge-ladAge))
+rangeProp
+tempRange
+rangeInts
+which(timescale$max_ma >= rangeProp[1] & timescale$min_ma < rangeProp[1])
+which(timescale$max_ma >= rangeInts[1] & timescale$min_ma < rangeInts[1])
+relTime <- function(x, timescale) {#
+	which(timescale$max_ma >= x & timescale$min_ma < x)#
+#
+}
+sapply(rangeInts, timescale)
+sapply(rangeInts, relTime, timescale, )
+sapply(rangeInts, relTime, timescale=timescale)
+paleoCont[i,sapply(rangeInts, relTime, timescale=timescale)]
+i
+paleoCont[sapply(rangeInts, relTime, timescale=timescale), i]
+scaledPaleoCont <- matrix(NA, nrow=101, ncol=ncol(paleoCont), dimnames=list(1:100, colnames(paleoCont)))#
+scaledGCD <- matrix(NA, nrow=101, ncol=ncol(greatCirc), dimnames=list(0:100, colnames(greatCirc)))
+scaledPaleoCont <- matrix(NA, nrow=101, ncol=ncol(paleoCont), dimnames=list(0:100, colnames(paleoCont)))#
+scaledGCD <- matrix(NA, nrow=101, ncol=ncol(greatCirc), dimnames=list(0:100, colnames(greatCirc)))
+i
+tempRange <- which(!is.na(paleoCont[,i])) # get index values of non-na values--the stratigraphic range#
+	fadIndex <- max(tempRange) # find the index of the last non-NA#
+	ladIndex <- min(tempRange) # find the index of the first non-NA#
+	fadAge <- timescale$max_ma[fadIndex]#
+	ladAge <- timescale$min_ma[ladIndex]#
+	rangeInts <- seq(fadAge, ladAge, length.out=101)#
+	rangeProp <- abs((rangeInts-fadAge)/(fadAge-ladAge))
+paleoCont[sapply(rangeInts, relTime, timescale=timescale), i]
+rangeInts
+timescale
+paleoCont[sapply(rangeInts, relTime, timescale=timescale), i]
+rangeInts <- seq(fadAge, ladAge, length.out=101)[-101]
+rangeInts
+paleoCont[sapply(rangeInts, relTime, timescale=timescale), i]
+timeScaled <- paleoCont[sapply(rangeInts, relTime, timescale=timescale), i]#
+	maxScaled <- timeScaled/max(timeScaled)
+maxScaled
+# custom function for determining the relative position of a geological stage within a stratigraphic range#
+relTime <- function(x, timescale) {#
+    which(timescale$max_ma >= x & timescale$min_ma < x)#
+#
+}#
+# set up two new data frames.#
+scaledPaleoCont <- matrix(NA, nrow=100, ncol=ncol(paleoCont), dimnames=list(1:100, colnames(paleoCont)))#
+scaledGCD <- matrix(NA, nrow=100, ncol=ncol(greatCirc), dimnames=list(1:100, colnames(greatCirc)))#
+#
+for(i in 1:ncol(paleoCont)) {#
+    tempRange <- which(!is.na(paleoCont[,i])) # get index values of non-na values--the stratigraphic range#
+    fadIndex <- max(tempRange) # find the index of the last non-NA#
+    ladIndex <- min(tempRange) # find the index of the first non-NA#
+    fadAge <- timescale$max_ma[fadIndex]#
+    ladAge <- timescale$min_ma[ladIndex]#
+    rangeInts <- seq(fadAge, ladAge, length.out=101)[-101] # 0 - 0.99 (eliminating 1.00, which is the interval after the LAD#
+    timeScaled <- paleoCont[sapply(rangeInts, relTime, timescale=timescale), i]#
+    maxScaled <- timeScaled/max(timeScaled)#
+    scaledPaleoCont[,i] <- maxScaled#
+    ## repeat for GCD, but need if statement because there are fewer columns/genera#
+    if(i <= ncol(scaledGCD)) {#
+        tempRange <- which(!is.na(greatCirc[,i])) # get index values of non-na values--the stratigraphic range#
+        fadIndex <- max(tempRange) # find the index of the last non-NA#
+        ladIndex <- min(tempRange) # find the index of the first non-NA#
+        fadAge <- timescale$max_ma[fadIndex]#
+        ladAge <- timescale$min_ma[ladIndex]#
+        rangeInts <- seq(fadAge, ladAge, length.out=101)[-101] # 0 - 0.99 (eliminating 1.00, which is the interval after the LAD#
+        timeScaled <- greatCirc[sapply(rangeInts, relTime, timescale=timescale), i]#
+        maxScaled <- timeScaled/max(timeScaled)#
+        scaledGCD[,i] <- maxScaled#
+    }#
+}
+head(scaledGCD)
+range(scaledGCD)
+tail(scaledGCD)
+quartz(hight=12, width=14)#
+par(mfrow=c(3,5), las=1)#
+randGenera <- sample(colnames(scaledGCD), 15)#
+for(i in 1:length(randGenera)) {#
+	plot(1:100, scaledGCD[,colnames(GCD)==randGenera[i]], type="l", lwd=2, xlab="Scaled time", ylab="Occupancy (scaled to max)", main= randGenera[i]) # great circle occupancy #
+	plot(1:100, scaledPaleoCont[,colnames(scaledPaleoCont)==randGenera[i]], type="l", lwd=2, lty=2) # tectonic plate occupancy#
+	legend("topleft", legend=c('GCD','Paleo. Continent'), lty=1:2, lwd=2, bty="n")#
+}
+quartz(height=12, width=14)#
+par(mfrow=c(3,5), las=1)#
+randGenera <- sample(colnames(scaledGCD), 15)#
+for(i in 1:length(randGenera)) {#
+	plot(1:100, scaledGCD[,colnames(scaledGCD)==randGenera[i]], type="l", lwd=2, xlab="Scaled time", ylab="Occupancy (scaled to max)", main= randGenera[i]) # great circle occupancy #
+	plot(1:100, scaledPaleoCont[,colnames(scaledPaleoCont)==randGenera[i]], type="l", lwd=2, lty=2) # tectonic plate occupancy#
+	legend("topleft", legend=c('GCD','Paleo. Continent'), lty=1:2, lwd=2, bty="n")#
+}
+quartz(height=12, width=16)#
+par(mfrow=c(3,5), las=1)#
+randGenera <- sample(colnames(scaledGCD), 15)#
+for(i in 1:length(randGenera)) {#
+	plot(1:100, scaledGCD[,colnames(scaledGCD)==randGenera[i]], type="l", lwd=2, xlab="Scaled time", ylab="Occupancy (scaled to max)", main= randGenera[i]) # great circle occupancy #
+	lines(1:100, scaledPaleoCont[,colnames(scaledPaleoCont)==randGenera[i]], type="l", lwd=2, lty=2) # tectonic plate occupancy#
+	if(i == 1) {#
+		legend("topleft", legend=c('GCD','Paleo. Continent'), lty=1:2, lwd=2, bty="n")#
+	}#
+}
+sd(rep(4,56))
+sd(c(rep(4,56),0.01)
+)
+paleoCont <- paleoCont[,apply(paleoCont,2,sd) > 0]#
+greatCirc <- greatCirc[,apply(greatCirc,2,sd) > 0]
+nrow(paleoCont)
+ncol(paleoCont)
+head(paleoCont)
+apply(paleoCont,2,sd)
+apply(paleoCont,2,sd, na.rm=T)
+#calc. individual parameters of interest#
+genus <- levels(steno$accepted_name)#
+fad <- tapply(steno$max_ma, steno$accepted_name, max)#
+lad <- tapply(steno$min_ma, steno$accepted_name, min)#
+nOccur <- as.numeric(table(steno$accepted_name))#
+nPaleocont <- tapply(steno$geoplate, steno$accepted_name, nUnique)#
+#
+# stitch them all into a single data frame#
+genera <- data.frame(genus, fad, lad, nOccur, nPaleocont)#
+nGen <- nrow(genera)#
+#
+# Set up data frames to hold geographic range values for each genus in each Phanerozoic stage#
+paleoCont <- data.frame(matrix(NA, nrow=nBins, ncol=nGen, dimnames=list(timescale$interval_name, genera$genus)))#
+greatCirc <- paleoCont # can set equal to paleoCont because we haven't filled in any values yet.#
+# calculate geographic range #
+# the easiest, though not fastest in terms of computational time, is to set up a loop though each time interval, the use apply functions to calculate geographic ranges#
+for(i in 1:nBins) {#
+    # get occurrences from time interval#
+    tempOccur <- steno[steno$max_ma > timescale$min_ma[i] & steno$min_ma < timescale$max_ma[i],]#
+    #tabulate the number of unique paleocontinents for each genus#
+    paleoCont[i,] <- tapply(tempOccur$geoplate, tempOccur$accepted_name, nUnique)#
+    #tabulate the great circle distance for each#
+    #but first drop all genera that don't have at least three occurrences#
+    temp <- table(tempOccur$accepted_name)#
+    tempOccur <- tempOccur[is.element(tempOccur$accepted_name, names(temp[temp>=3])),] #
+    greatCirc[i,] <- as.numeric(by(tempOccur[, match(c('paleolng','paleolat'), colnames(tempOccur))], tempOccur$accepted_name, maxGCD))#
+}#
+#
+# remove genera that don't have any geographic ranges#
+# some don't have GCD ranges because the don't have any intervals with at least three occurrences#
+greatCirc <- greatCirc[, apply(greatCirc, 2, sum, na.rm=T) > 0]#
+#
+# convert NAs within stratigraphic ranges to zeros#
+paleoCont <- apply(paleoCont, 2, internalNAtoZero) # apply function to columns#
+greatCirc <- apply(greatCirc, 2, internalNAtoZero) # apply function to columns
+apply(paleoCont,2,sd, na.rm=T)
+apply(paleoCont,2,sd)
+paleoCont <- paleoCont[,apply(paleoCont,2,sd,na.rm=TRUE) > 0]#
+greatCirc <- greatCirc[,apply(greatCirc,2,sd,na.rm=TRUE) > 0]
+ncol(paleoCont)
+head(paleoCont)
+ncol(greatCirc)
+head(greatCirc)
+# custom function for determining the relative position of a geological stage within a stratigraphic range#
+relTime <- function(x, timescale) {#
+    which(timescale$max_ma >= x & timescale$min_ma < x)#
+}#
+#
+# set up two new data frames.#
+scaledPaleoCont <- matrix(NA, nrow=100, ncol=ncol(paleoCont), dimnames=list(1:100, colnames(paleoCont)))#
+scaledGCD <- matrix(NA, nrow=100, ncol=ncol(greatCirc), dimnames=list(1:100, colnames(greatCirc)))#
+#
+for(i in 1:ncol(paleoCont)) {#
+    tempRange <- which(!is.na(paleoCont[,i])) # get index values of non-na values--the stratigraphic range#
+    fadIndex <- max(tempRange) # find the index of the last non-NA#
+    ladIndex <- min(tempRange) # find the index of the first non-NA#
+    fadAge <- timescale$max_ma[fadIndex]#
+    ladAge <- timescale$min_ma[ladIndex]#
+    rangeInts <- seq(fadAge, ladAge, length.out=101)[-101] # 0 - 0.99 (eliminating 1.00, which is the interval after the LAD#
+    timeScaled <- paleoCont[sapply(rangeInts, relTime, timescale=timescale), i]#
+    maxScaled <- timeScaled/max(timeScaled)#
+    scaledPaleoCont[,i] <- maxScaled#
+    ## repeat for GCD, but need if statement because there are fewer columns/genera#
+    if(i <= ncol(scaledGCD)) {#
+        tempRange <- which(!is.na(greatCirc[,i])) # get index values of non-na values--the stratigraphic range#
+        fadIndex <- max(tempRange) # find the index of the last non-NA#
+        ladIndex <- min(tempRange) # find the index of the first non-NA#
+        fadAge <- timescale$max_ma[fadIndex]#
+        ladAge <- timescale$min_ma[ladIndex]#
+        rangeInts <- seq(fadAge, ladAge, length.out=101)[-101] # 0 - 0.99 (eliminating 1.00, which is the interval after the LAD#
+        timeScaled <- greatCirc[sapply(rangeInts, relTime, timescale=timescale), i]#
+        maxScaled <- timeScaled/max(timeScaled)#
+        scaledGCD[,i] <- maxScaled#
+    }#
+}
+i
+tempRange <- which(!is.na(paleoCont[,i])) # get index values of non-na values--the stratigraphic range#
+	fadIndex <- max(tempRange) # find the index of the last non-NA#
+	ladIndex <- min(tempRange) # find the index of the first non-NA#
+	fadAge <- timescale$max_ma[fadIndex]#
+	ladAge <- timescale$min_ma[ladIndex]
+fadAge
+ladAge
+rangeInts <- seq(fadAge, ladAge, length.out=101)[-101] # 0 - 0.99 (eliminating 1.00, which is the interval after the LAD
+rangeInts
+# set up two new data frames.#
+scaledPaleoCont <- matrix(NA, nrow=100, ncol=ncol(paleoCont), dimnames=list(1:100, colnames(paleoCont)))#
+scaledGCD <- matrix(NA, nrow=100, ncol=ncol(greatCirc), dimnames=list(1:100, colnames(greatCirc)))#
+#
+for(i in 1:ncol(paleoCont)) {#
+	tempRange <- which(!is.na(paleoCont[,i])) # get index values of non-na values--the stratigraphic range#
+	fadIndex <- max(tempRange) # find the index of the last non-NA#
+	ladIndex <- min(tempRange) # find the index of the first non-NA#
+	fadAge <- timescale$max_ma[fadIndex]#
+	ladAge <- timescale$min_ma[ladIndex]#
+	rangeInts <- seq(fadAge, ladAge, length.out=101)[-101] # 0 - 0.99 (eliminating 1.00, which is the interval after the LAD#
+	timeScaled <- paleoCont[sapply(rangeInts, relTime, timescale=timescale), i]#
+	maxScaled <- timeScaled/max(timeScaled)#
+	scaledPaleoCont[,i] <- maxScaled#
+	## repeat for GCD, but need if statement because there are fewer columns/genera#
+	if(i <= ncol(scaledGCD)) {#
+		tempRange <- which(!is.na(greatCirc[,i])) # get index values of non-na values--the stratigraphic range#
+		fadIndex <- max(tempRange) # find the index of the last non-NA#
+		ladIndex <- min(tempRange) # find the index of the first non-NA#
+		fadAge <- timescale$max_ma[fadIndex]#
+		ladAge <- timescale$min_ma[ladIndex]#
+		rangeInts <- seq(fadAge, ladAge, length.out=101)[-101] # 0 - 0.99 (eliminating 1.00, which is the interval after the LAD#
+		timeScaled <- greatCirc[sapply(rangeInts, relTime, timescale=timescale), i]#
+		maxScaled <- timeScaled/max(timeScaled)#
+		scaledGCD[,i] <- maxScaled#
+	}#
+}
+i
+i <- 3
+i <- 4
+tempRange <- which(!is.na(greatCirc[,i])) # get index values of non-na values--the stratigraphic range#
+		fadIndex <- max(tempRange) # find the index of the last non-NA#
+		ladIndex <- min(tempRange) # find the index of the first non-NA#
+		fadAge <- timescale$max_ma[fadIndex]#
+		ladAge <- timescale$min_ma[ladIndex]
+fadAge
+ladAge
+tempRange
+ncol(scaledGCD)
+ncol(greatCirc)
+greatCirc[,i]
+unique(greatCirc[,i])
+# Set up data frames to hold geographic range values for each genus in each Phanerozoic stage#
+paleoCont <- data.frame(matrix(NA, nrow=nBins, ncol=nGen, dimnames=list(timescale$interval_name, genera$genus)))#
+greatCirc <- paleoCont # can set equal to paleoCont because we haven't filled in any values yet.#
+# calculate geographic range #
+# the easiest, though not fastest in terms of computational time, is to set up a loop though each time interval, the use apply functions to calculate geographic ranges#
+for(i in 1:nBins) {#
+    # get occurrences from time interval#
+    tempOccur <- steno[steno$max_ma > timescale$min_ma[i] & steno$min_ma < timescale$max_ma[i],]#
+    #tabulate the number of unique paleocontinents for each genus#
+    paleoCont[i,] <- tapply(tempOccur$geoplate, tempOccur$accepted_name, nUnique)#
+    #tabulate the great circle distance for each#
+    #but first drop all genera that don't have at least three occurrences#
+    temp <- table(tempOccur$accepted_name)#
+    tempOccur <- tempOccur[is.element(tempOccur$accepted_name, names(temp[temp>=3])),] #
+    greatCirc[i,] <- as.numeric(by(tempOccur[, match(c('paleolng','paleolat'), colnames(tempOccur))], tempOccur$accepted_name, maxGCD))#
+}#
+#
+# remove genera that don't have any geographic ranges#
+# some don't have GCD ranges because the don't have any intervals with at least three occurrences#
+greatCirc <- greatCirc[, apply(greatCirc, 2, sum, na.rm=T) >= 3]#
+#
+# convert NAs within stratigraphic ranges to zeros#
+paleoCont <- apply(paleoCont, 2, internalNAtoZero) # apply function to columns#
+greatCirc <- apply(greatCirc, 2, internalNAtoZero) # apply function to columns#
+#
+# drop columns with no variation in geographic range#
+paleoCont <- paleoCont[,apply(paleoCont,2,sd,na.rm=TRUE) > 0]#
+greatCirc <- greatCirc[,apply(greatCirc,2,sd,na.rm=TRUE) > 0]
+head(greatCirc)
+ncol(greatCirc)
+greatCirc[,4]
+# Set up data frames to hold geographic range values for each genus in each Phanerozoic stage#
+paleoCont <- data.frame(matrix(NA, nrow=nBins, ncol=nGen, dimnames=list(timescale$interval_name, genera$genus)))#
+greatCirc <- paleoCont # can set equal to paleoCont because we haven't filled in any values yet.#
+# calculate geographic range #
+# the easiest, though not fastest in terms of computational time, is to set up a loop though each time interval, the use apply functions to calculate geographic ranges#
+for(i in 1:nBins) {#
+    # get occurrences from time interval#
+    tempOccur <- steno[steno$max_ma > timescale$min_ma[i] & steno$min_ma < timescale$max_ma[i],]#
+    #tabulate the number of unique paleocontinents for each genus#
+    paleoCont[i,] <- tapply(tempOccur$geoplate, tempOccur$accepted_name, nUnique)#
+    #tabulate the great circle distance for each#
+    #but first drop all genera that don't have at least three occurrences#
+    temp <- table(tempOccur$accepted_name)#
+    tempOccur <- tempOccur[is.element(tempOccur$accepted_name, names(temp[temp>=3])),] #
+    greatCirc[i,] <- as.numeric(by(tempOccur[, match(c('paleolng','paleolat'), colnames(tempOccur))], tempOccur$accepted_name, maxGCD))#
+}#
+#
+# remove genera that don't have any geographic ranges#
+# some don't have GCD ranges because the don't have any intervals with at least three occurrences#
+greatCirc <- greatCirc[, apply(greatCirc, 2, sum, na.rm=T) >= 3]#
+#
+# convert NAs within stratigraphic ranges to zeros#
+paleoCont <- apply(paleoCont, 2, internalNAtoZero) # apply function to columns#
+greatCirc <- apply(greatCirc, 2, internalNAtoZero) # apply function to columns#
+#
+# drop columns with no variation in geographic range#
+#paleoCont <- paleoCont[,apply(paleoCont,2,sd,na.rm=TRUE) > 0]#
+#greatCirc <- greatCirc[,apply(greatCirc,2,sd,na.rm=TRUE) > 0]
+greatCirc[,4]
+apply(greatCirc,2,sd,na.rm=TRUE)
+# drop columns with no variation in geographic range#
+paleoCont <- paleoCont[,apply(paleoCont,2,sd,na.rm=TRUE) > 0 & !is.na(apply(paleoCont,2,sd,na.rm=TRUE))]#
+greatCirc <- greatCirc[,apply(greatCirc,2,sd,na.rm=TRUE) > 0 & !is.na(apply(greatCirc,2,sd,na.rm=TRUE))]
+apply(greatCirc,2,sd,na.rm=TRUE)
+length(apply(greatCirc,2,sd,na.rm=TRUE))
+range(greatCirc)
+range(greatCirc, na.rm=T)
+hist(greatCirc, na.rm=T)
+hist(log10(greatCirc), na.rm=T)
+hist(log10(unique(greatCirc)), na.rm=T)
+hist(log10(unique(greatCirc)))
+range(greatCirc)
+range(greatCirc, na.rm=T)
+min(greatCirc, na.rm=T)
+min(greatCirc[greatCirc > 0], na.rm=T)
+log10(1399.663)
+log10(100)
+log10(10)
+log10(1)
+# set up two new data frames.#
+scaledPaleoCont <- matrix(NA, nrow=100, ncol=ncol(paleoCont), dimnames=list(1:100, colnames(paleoCont)))#
+scaledGCD <- matrix(NA, nrow=100, ncol=ncol(greatCirc), dimnames=list(1:100, colnames(greatCirc)))#
+#
+for(i in 1:ncol(paleoCont)) {#
+    tempRange <- which(!is.na(paleoCont[,i])) # get index values of non-na values--the stratigraphic range#
+    fadIndex <- max(tempRange) # find the index of the last non-NA#
+    ladIndex <- min(tempRange) # find the index of the first non-NA#
+    fadAge <- timescale$max_ma[fadIndex]#
+    ladAge <- timescale$min_ma[ladIndex]#
+    rangeInts <- seq(fadAge, ladAge, length.out=101)[-101] # 0 - 0.99 (eliminating 1.00, which is the interval after the LAD#
+    timeScaled <- paleoCont[sapply(rangeInts, relTime, timescale=timescale), i]#
+    maxScaled <- timeScaled/max(timeScaled)#
+    scaledPaleoCont[,i] <- maxScaled#
+    ## repeat for GCD, but need if statement because there are fewer columns/genera#
+    if(i <= ncol(scaledGCD)) {#
+        tempRange <- which(!is.na(greatCirc[,i])) # get index values of non-na values--the stratigraphic range#
+        fadIndex <- max(tempRange) # find the index of the last non-NA#
+        ladIndex <- min(tempRange) # find the index of the first non-NA#
+        fadAge <- timescale$max_ma[fadIndex]#
+        ladAge <- timescale$min_ma[ladIndex]#
+        rangeInts <- seq(fadAge, ladAge, length.out=101)[-101] # 0 - 0.99 (eliminating 1.00, which is the interval after the LAD#
+        timeScaled <- greatCirc[sapply(rangeInts, relTime, timescale=timescale), i]#
+        maxScaled <- timeScaled/max(timeScaled)#
+        scaledGCD[,i] <- maxScaled#
+    }#
+}
+quartz(height=12, width=16)#
+par(mfrow=c(3,5), las=1)#
+randGenera <- sample(colnames(scaledGCD), 15)#
+for(i in 1:length(randGenera)) {#
+    plot(1:100, scaledGCD[,colnames(scaledGCD)==randGenera[i]], type="l", lwd=2, xlab="Scaled time", ylab="Occupancy (scaled to max)", main= randGenera[i]) # great circle occupancy #
+    lines(1:100, scaledPaleoCont[,colnames(scaledPaleoCont)==randGenera[i]], type="l", lwd=2, lty=2) # tectonic plate occupancy#
+    if(i == 1) {#
+        legend("topleft", legend=c('GCD','Paleo. Continent'), lty=1:2, lwd=2, bty="n")#
+    }#
+}
+i
+?intersect
+intersect(colnames(scaledPaleoScont, scaledGCD)
+intersect(colnames(scaledPaleoScont), colnames(scaledGCD))
+intersect(colnames(scaledPaleoCont), colnames(scaledGCD))
+quartz(height=12, width=16)#
+par(mfrow=c(3,5), las=1)#
+randGenera <- sample(intersect(colnames(scaledPaleoCont), colnames(scaledGCD)), 15)#
+for(i in 1:length(randGenera)) {#
+	plot(1:100, scaledGCD[,colnames(scaledGCD)==randGenera[i]], type="l", lwd=2, xlab="Scaled time", ylab="Occupancy (scaled to max)", main= randGenera[i]) # great circle occupancy #
+	lines(1:100, scaledPaleoCont[,colnames(scaledPaleoCont)==randGenera[i]], type="l", lwd=2, lty=2) # tectonic plate occupancy#
+	if(i == 1) {#
+		legend("topleft", legend=c('GCD','Paleo. Continent'), lty=1:2, lwd=2, bty="n")#
+	}#
+}
+quartz(height=12, width=16)#
+par(mfrow=c(3,5), las=1)#
+randGenera <- sample(intersect(colnames(scaledPaleoCont), colnames(scaledGCD)), 15)#
+for(i in 1:length(randGenera)) {#
+	plot(1:100, scaledGCD[,colnames(scaledGCD)==randGenera[i]], type="l", lwd=2, xlab="Scaled time", ylab="Occupancy (scaled to max)", main= randGenera[i], ylim=c(0,1)) # great circle occupancy #
+	lines(1:100, scaledPaleoCont[,colnames(scaledPaleoCont)==randGenera[i]], type="l", lwd=2, lty=2) # tectonic plate occupancy#
+	if(i == 1) {#
+		legend("topleft", legend=c('GCD','Paleo. Continent'), lty=1:2, lwd=2, bty="n")#
+	}#
+}
+quartz()#
+plot(1:100, meanGCD, type="l", lwd=2, xlab="Scaled time", ylab="Average occupancy (scaled to max)", ylim=c(0,1)) # great circle occupancy #
+lines(1:100, meanPaleoCont, type="l", lwd=2, lty=2) # tectonic plate occupancy#
+legend("topleft", legend=c('GCD','Paleo. Continent'), lty=1:2, lwd=2, bty="n")
+meanPaleoCont <- apply(scaledPaleoCont, 1, mean)#
+meanGCD <- apply(scaledGCD, 1, mean)#
+#
+quartz()#
+plot(1:100, meanGCD, type="l", lwd=2, xlab="Scaled time", ylab="Average occupancy (scaled to max)", ylim=c(0,1)) # great circle occupancy #
+lines(1:100, meanPaleoCont, type="l", lwd=2, lty=2) # tectonic plate occupancy#
+legend("topleft", legend=c('GCD','Paleo. Continent'), lty=1:2, lwd=2, bty="n")
+par(las=1)#
+plot(1:100, meanGCD, type="l", lwd=2, xlab="Scaled time", ylab="Average occupancy (scaled to max)", ylim=c(0,1)) # great circle occupancy #
+lines(1:100, meanPaleoCont, type="l", lwd=2, lty=2) # tectonic plate occupancy#
+legend("topleft", legend=c('GCD','Paleo. Continent'), lty=1:2, lwd=2, bty="n")
+q()
+library(geosphere)#
+#
+# get Stenolaemata occurrences from PBDB#
+steno <- read.delim("https://paleobiodb.org/data1.2/occs/list.tsv?&base_name=Stenolaemata&idreso=lump_genus&show=class,paleoloc")#
+#
+# it's important to drop occurrences where the paleolocations are unknown#
+steno <- droplevels(subset(steno, !is.na(paleolng)))#
+#
+# Timescale excluding Pleistocene and Holocene#
+timescale <- read.delim("https://paleobiodb.org/data1.2/intervals/list.tsv?scale_level=5&min_ma=2.588")#
+nBins <- nrow(timescale)#
+#
+# generate data frame for genus-level information#
+# FAD, LAD, nPalocont, nOccur #
+#
+# this is a simple custom function that will count the number of uniqe values in a vector#
+nUnique <- function(x) {return(length(unique(x)))}#
+#
+# this is a custom function to calculate max great circle distance#
+maxGCD <- function(x) {#
+    require(geosphere)#
+    coords <- unique(x)#
+    distances <- apply(x, 1, distGeo, x)#
+    upperDist <- distances[lower.tri(distances, diag = FALSE)]#
+    return(max(upperDist))#
+}#
+#
+# this is a custom function to identify NA values that are between non-NA values and set them equal to zero.#
+# this is needed to properly time scale the geographic occupancy#
+internalNAtoZero <- function(x) {#
+    NonNAindex <- which(!is.na(x)) # get non-na values#
+    firstNonNA <- min(NonNAindex) # find the index of the first non-NA#
+    lastNonNA <- max(NonNAindex) # find the index of the last non-NA#
+    tempRange <- x[firstNonNA:lastNonNA] # get full range, including NAs#
+    tempRange[is.na(tempRange)] <- 0 # change NAs within range to 0#
+    x[firstNonNA:lastNonNA] <- tempRange # reset values in original vector#
+    return(x)#
+}#
+#
+#calc. individual parameters of interest#
+genus <- levels(steno$accepted_name)#
+fad <- tapply(steno$max_ma, steno$accepted_name, max)#
+lad <- tapply(steno$min_ma, steno$accepted_name, min)#
+nOccur <- as.numeric(table(steno$accepted_name))#
+nPaleocont <- tapply(steno$geoplate, steno$accepted_name, nUnique)#
+#
+# stitch them all into a single data frame#
+genera <- data.frame(genus, fad, lad, nOccur, nPaleocont)#
+nGen <- nrow(genera)#
+#
+# Set up data frames to hold geographic range values for each genus in each Phanerozoic stage#
+paleoCont <- data.frame(matrix(NA, nrow=nBins, ncol=nGen, dimnames=list(timescale$interval_name, genera$genus)))#
+greatCirc <- paleoCont # can set equal to paleoCont because we haven't filled in any values yet.#
+# calculate geographic range #
+# the easiest, though not fastest in terms of computational time, is to set up a loop though each time interval, the use apply functions to calculate geographic ranges#
+for(i in 1:nBins) {#
+    # get occurrences from time interval#
+    tempOccur <- steno[steno$max_ma > timescale$min_ma[i] & steno$min_ma < timescale$max_ma[i],]#
+    #tabulate the number of unique paleocontinents for each genus#
+    paleoCont[i,] <- tapply(tempOccur$geoplate, tempOccur$accepted_name, nUnique)#
+    #tabulate the great circle distance for each#
+    #but first drop all genera that don't have at least three occurrences#
+    temp <- table(tempOccur$accepted_name)#
+    tempOccur <- tempOccur[is.element(tempOccur$accepted_name, names(temp[temp>=3])),] #
+    greatCirc[i,] <- as.numeric(by(tempOccur[, match(c('paleolng','paleolat'), colnames(tempOccur))], tempOccur$accepted_name, maxGCD))#
+}#
+#
+# remove genera that don't have any geographic ranges#
+# some don't have GCD ranges because the don't have any intervals with at least three occurrences#
+greatCirc <- greatCirc[, apply(greatCirc, 2, sum, na.rm=T) >= 3]#
+#
+# convert NAs within stratigraphic ranges to zeros#
+paleoCont <- apply(paleoCont, 2, internalNAtoZero) # apply function to columns#
+greatCirc <- apply(greatCirc, 2, internalNAtoZero) # apply function to columns#
+#
+# drop columns with no variation in geographic range#
+paleoCont <- paleoCont[,apply(paleoCont,2,sd,na.rm=TRUE) > 0 & !is.na(apply(paleoCont,2,sd,na.rm=TRUE))]#
+greatCirc <- greatCirc[,apply(greatCirc,2,sd,na.rm=TRUE) > 0 & !is.na(apply(greatCirc,2,sd,na.rm=TRUE))]
+# custom function for determining the relative position of a geological stage within a stratigraphic range#
+relTime <- function(x, timescale) {#
+    which(timescale$max_ma >= x & timescale$min_ma < x)#
+}#
+#
+# set up two new data frames.#
+scaledPaleoCont <- matrix(NA, nrow=100, ncol=ncol(paleoCont), dimnames=list(1:100, colnames(paleoCont)))#
+scaledGCD <- matrix(NA, nrow=100, ncol=ncol(greatCirc), dimnames=list(1:100, colnames(greatCirc)))#
+#
+for(i in 1:ncol(paleoCont)) {#
+    tempRange <- which(!is.na(paleoCont[,i])) # get index values of non-na values--the stratigraphic range#
+    fadIndex <- max(tempRange) # find the index of the last non-NA#
+    ladIndex <- min(tempRange) # find the index of the first non-NA#
+    fadAge <- timescale$max_ma[fadIndex]#
+    ladAge <- timescale$min_ma[ladIndex]#
+    rangeInts <- seq(fadAge, ladAge, length.out=101)[-101] # 0 - 0.99 (eliminating 1.00, which is the interval after the LAD#
+    timeScaled <- paleoCont[sapply(rangeInts, relTime, timescale=timescale), i]#
+    maxScaled <- timeScaled/max(timeScaled)#
+    scaledPaleoCont[,i] <- maxScaled#
+    ## repeat for GCD, but need if statement because there are fewer columns/genera#
+    if(i <= ncol(scaledGCD)) {#
+        tempRange <- which(!is.na(greatCirc[,i])) # get index values of non-na values--the stratigraphic range#
+        fadIndex <- max(tempRange) # find the index of the last non-NA#
+        ladIndex <- min(tempRange) # find the index of the first non-NA#
+        fadAge <- timescale$max_ma[fadIndex]#
+        ladAge <- timescale$min_ma[ladIndex]#
+        rangeInts <- seq(fadAge, ladAge, length.out=101)[-101] # 0 - 0.99 (eliminating 1.00, which is the interval after the LAD#
+        timeScaled <- greatCirc[sapply(rangeInts, relTime, timescale=timescale), i]#
+        maxScaled <- timeScaled/max(timeScaled)#
+        scaledGCD[,i] <- maxScaled#
+    }#
+}
+quartz(height=12, width=16)#
+par(mfrow=c(3,5), las=1)#
+randGenera <- sample(intersect(colnames(scaledPaleoCont), colnames(scaledGCD)), 15)#
+for(i in 1:length(randGenera)) {#
+    plot(1:100, scaledGCD[,colnames(scaledGCD)==randGenera[i]], type="l", lwd=2, xlab="Scaled time", ylab="Occupancy (scaled to max)", main= randGenera[i], ylim=c(0,1)) # great circle occupancy #
+    lines(1:100, scaledPaleoCont[,colnames(scaledPaleoCont)==randGenera[i]], type="l", lwd=2, lty=2) # tectonic plate occupancy#
+    if(i == 1) {#
+        legend("topleft", legend=c('GCD','Paleo. Continent'), lty=1:2, lwd=2, bty="n")#
+    }#
+}#
+## now let's calculate the average occupancy using apply()#
+meanPaleoCont <- apply(scaledPaleoCont, 1, mean)#
+meanGCD <- apply(scaledGCD, 1, mean)#
+#
+quartz()#
+par(las=1)#
+plot(1:100, meanGCD, type="l", lwd=2, xlab="Scaled time", ylab="Average occupancy (scaled to max)", ylim=c(0,1)) # great circle occupancy #
+lines(1:100, meanPaleoCont, type="l", lwd=2, lty=2) # tectonic plate occupancy#
+legend("topleft", legend=c('GCD','Paleo. Continent'), lty=1:2, lwd=2, bty="n")
+rangeInts
+q()
+x <- read.delim(file="NewScotlandData.txt")
+head(x)
+y <- data.frame('id'=paste(x$Bed,x$Sample,sep=""), x)
+head(y)
+write.table(y, file="NewScotlandData.txt", sep="\t", quote=F, row.names=F, na="")
+y <- data.frame('id'=paste(x$Bed,x$Sample,sep="."), x)
+write.table(y, file="NewScotlandData.txt", sep="\t", quote=F, row.names=F, na="")
+head(y)
+y <- data.frame('id'=paste(x$Bed,x$Sample,sep="-"), x)
+write.table(y, file="NewScotlandData.txt", sep="\t", quote=F, row.names=F, na="")
+head(y)
+newScotland <- read.delim(file="https://raw.githubusercontent.com/naheim/paleoLabExercises/master/lab7bFigs/NewScotlandData.txt")
+newScotland
+sampleInfo <- newScotland[,1:3]#
+genusCounts <- newScotland[,-1:3]
+sampleInfo <- newScotland[,1:3]#
+genusCounts <- newScotland[,-(1:3)]
+sampleInfo
+genusCounts
+by(genusCounts, sampleInfo$Bed, ncol)
+by(genusCounts, sampleInfo$Bed, rowSums)
+by(genusCounts, sampleInfo$Bed, colSums)
+class(by(genusCounts, sampleInfo$Bed, colSums))
+sum(by(genusCounts, sampleInfo$Bed, colSums))
+rowSums(by(genusCounts, sampleInfo$Bed, colSums))
+by(by(genusCounts, sampleInfo$Bed, colSums),sum)
+by(genusCounts, sampleInfo$Bed, rowSums)
+by(genusCounts, sampleInfo$Bed, colSums)
+split(genusCounts, sampleInfo$Beds)
+genusCounts
+sampleInfo$Beds
+sampleInfo$Bed
+split(genusCounts, sampleInfo$Bed)
+class(split(genusCounts, sampleInfo$Bed))
+beds <- split(genusCounts, sampleInfo$Bed)#
+#
+# access individual beds by their bed name#
+beds$RHR6 # this is the sixth bed
+lapply(beds, rowSums)
+lapply(beds, colSums)
+lapply(lapply(beds, colSums),sum)
+lapply(beds, sum)
+q()

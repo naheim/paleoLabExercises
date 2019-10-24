@@ -115,7 +115,7 @@ We can also apply additive diversity partitioning to measures of evenness, inclu
 #### Exercise Questions 3
 
 1. What are &alpha;, &beta;<sub>1</sub>, and &beta;<sub>2</sub>?
-2. Overall, do you think the New Scotlant has high evenness or low eveness?
+2. Overall, do you think the New Scotland has high evenness or low evenness?
 3. Which contributes most to total evenness?
 4. What what it means for that level to contribute most to diversity?
 5. Add to your R script code that calculates &alpha;, &beta;<sub>1</sub>, and &beta;<sub>2</sub> for Simpson's D and plots these values as bar plot (as in published examples above).
